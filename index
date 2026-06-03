@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>Beep Test</title>
+<style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        background: #111;
+        color: white;
+        margin-top: 50px;
+    }
+    button {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Beep Test (every 1 second)</h1>
+
+<button onclick="start()">Start</button>
+
+<audio id="beep" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+<script>
+let interval = null;
+
+function beep() {
+    let audio = document.getElementById("beep");
+
+    // reset and play
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function start() {
+    // stop previous if running
+    if (interval) clearInterval(interval);
+
+    // required for iPhone autoplay policy
+    beep();
+
+    interval = setInterval(() => {
+        beep();
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
